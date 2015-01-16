@@ -11,7 +11,7 @@
       <span>Task list</span>
     </header>
     <div class="main">
-      <section>
+      <section id="taskCreation" class="not">
         <form>
           <div>
             <label>Task</label>
@@ -73,7 +73,7 @@
           </tbody>
         </table>
         <nav>
-          <a href="#">Add task</a>
+          <a href="#" id="btnAddTask">Add task</a>
         </nav>
       </section>
     </div>
@@ -83,6 +83,11 @@
       $('[required]').prev('label').append('<span>*</span>').children('span').addClass('required');
 
       $('tbody tr:even').addClass('even');
+
+      $('#btnAddTask').click(function(event) {
+        event.preventDefault();
+        $('#taskCreation').removeClass('not');
+      });
     </script>
   </body>
 </html>
