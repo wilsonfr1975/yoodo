@@ -23,7 +23,7 @@
             <input type="date" required name="requiredBy">
           </div>
           <div>
-            <label for="">Category</label>
+            <label>Category</label>
             <select name="category">
               <option value="Personal">Personal</option>
               <option value="Work">Work</option>
@@ -64,7 +64,6 @@
     <script type="text/javascript">
 $(function() {
   $('[required]').prev('label').append('<span>*</span>').children('span').addClass('required');
-
   $('tbody tr:even').addClass('even');
 
   $('#btnAddTask').click(function(event) {
@@ -86,32 +85,32 @@ $(function() {
     var task = $('form').toObject();
     $('#taskRow').tmpl(task).appendTo($('#tblTasks tbody'));
   });
-
-  (function($) {
-    $.fn.extend({
-      toObject: function() {
-        var result = {}
-
-        $.each(this.serializeArray(), function(i, v) {
-          result[v.name] = v.value;
-        });
-
-        return result;
-      },
-      fromObject: function(obj) {
-        $.each(this.find(':input'), function(i, v) {
-          var name = $(v).attr('name');
-
-          if (obj[name]) {
-            $(v).val(obj[name]);
-          } else {
-            $(v).val('');
-          }
-        });
-      }
-    });
-  })(jQuery);
 });
+
+(function($) {
+  $.fn.extend({
+    toObject: function() {
+      var result = {}
+
+      $.each(this.serializeArray(), function(i, v) {
+        result[v.name] = v.value;
+      });
+
+      return result;
+    },
+    fromObject: function(obj) {
+      $.each(this.find(':input'), function(i, v) {
+        var name = $(v).attr('name');
+
+        if (obj[name]) {
+          $(v).val(obj[name]);
+        } else {
+          $(v).val('');
+        }
+      });
+    }
+  });
+})(jQuery);
     </script>
     <script id="taskRow" type="text/x-jQuery-tmpl">
 <tr>
