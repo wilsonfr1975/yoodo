@@ -37,15 +37,17 @@
       <section>
         <table id="tblTasks">
           <colgroup>
-            <col width="50%">
-            <col width="25%">
-            <col width="25%">
+            <col width="40%">
+            <col width="15%">
+            <col width="15%">
+            <col width="30%">
           </colgroup>
           <thead>
             <tr>
               <th>Name</th>
               <th>Due</th>
               <th>Category</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -55,6 +57,13 @@
                 <time datetime="2013-10-14">2013-10-14</time>
               </td>
               <td>Personal</td>
+              <td>
+                  <nav>   
+                      <a href="#" class="editRow">Edit</a>
+                      <a href="#" class="completeRow">Complete</a>
+                      <a href="#" class="deleteRow" >Delete</a>
+                    </nav>
+              </td>
             </tr>
             <tr>
               <td>Perform project demo to stakeholders</td>
@@ -62,6 +71,13 @@
                 <time datetime="2013-10-14">2013-10-14</time>
               </td>
               <td>Work</td>
+              <td>
+                  <nav>   
+                      <a href="#" class="editRow">Edit</a>
+                      <a href="#" class="completeRow">Complete</a>
+                      <a href="#" class="deleteRow" >Delete</a>
+                    </nav>
+              </td>
             </tr>
             <tr>
               <td>Meet friends for dinner</td>
@@ -69,6 +85,13 @@
                 <time datetime="2013-10-14">2013-10-14</time>
               </td>
               <td>Personal</td>
+              <td>
+                  <nav>   
+                      <a href="#" class="editRow">Edit</a>
+                      <a href="#" class="completeRow">Complete</a>
+                      <a href="#" class="deleteRow" >Delete</a>
+                    </nav>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -80,14 +103,25 @@
     <footer>You have 3 tasks</footer>
 
     <script type="text/javascript">
-      $('[required]').prev('label').append('<span>*</span>').children('span').addClass('required');
+$(function() {
+  $('[required]').prev('label').append('<span>*</span>').children('span').addClass('required');
 
-      $('tbody tr:even').addClass('even');
+  $('tbody tr:even').addClass('even');
 
-      $('#btnAddTask').click(function(event) {
-        event.preventDefault();
-        $('#taskCreation').removeClass('not');
-      });
+  $('#btnAddTask').click(function(event) {
+    event.preventDefault();
+    $('#taskCreation').removeClass('not');
+  });
+
+  $('tbody tr').click(function(event) {
+    $(event.target).closest('td').siblings().andSelf().toggleClass('rowHighlight');
+  });
+
+  $('#tblTasks tbody').on('click', '.deleteRow', function(event) {
+    event.preventDefault();
+    $(event.target).parents('tr').remove();
+  });
+});
     </script>
   </body>
 </html>
