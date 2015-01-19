@@ -30,7 +30,7 @@
             </select>
           </div>
           <nav>
-            <a href="#">Save task</a>
+            <a href="#" id="saveTask">Save task</a>
             <a href="#">Clear task</a>
           </nav>
         </form>
@@ -52,48 +52,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Return library books</td>
-              <td>
-                <time datetime="2013-10-14">2013-10-14</time>
-              </td>
-              <td>Personal</td>
-              <td>
-                  <nav>   
-                      <a href="#" class="editRow">Edit</a>
-                      <a href="#" class="completeRow">Complete</a>
-                      <a href="#" class="deleteRow" >Delete</a>
-                    </nav>
-              </td>
-            </tr>
-            <tr>
-              <td>Perform project demo to stakeholders</td>
-              <td>
-                <time datetime="2013-10-14">2013-10-14</time>
-              </td>
-              <td>Work</td>
-              <td>
-                  <nav>   
-                      <a href="#" class="editRow">Edit</a>
-                      <a href="#" class="completeRow">Complete</a>
-                      <a href="#" class="deleteRow" >Delete</a>
-                    </nav>
-              </td>
-            </tr>
-            <tr>
-              <td>Meet friends for dinner</td>
-              <td>
-                <time datetime="2013-10-14">2013-10-14</time>
-              </td>
-              <td>Personal</td>
-              <td>
-                  <nav>   
-                      <a href="#" class="editRow">Edit</a>
-                      <a href="#" class="completeRow">Complete</a>
-                      <a href="#" class="deleteRow" >Delete</a>
-                    </nav>
-              </td>
-            </tr>
           </tbody>
         </table>
         <nav>
@@ -123,6 +81,12 @@ $(function() {
     $(event.target).parents('tr').remove();
   });
 
+  $('#saveTask').click(function(event) {
+    event.preventDefault();
+    var task = $('form').toObject();
+    $('#taskRow').tmpl(task).appendTo($('#tblTasks tbody'));
+  });
+
   (function($) {
     $.fn.extend({
       toObject: function() {
@@ -148,6 +112,20 @@ $(function() {
     });
   })(jQuery);
 });
+    </script>
+    <script id="taskRow" type="text/x-jQuery-tmpl">
+<tr>
+  <td>${task}</td>
+  <td><time datetime="${requiredBy}">${requiredBy}</time></td>
+  <td>${category}</td>
+  <td>
+    <nav>
+      <a href="#">Edit</a>
+      <a href="#">Complete</a>
+      <a href="#" class="deleteRow">Delete</a>
+    </nav>
+  </td>
+</tr>
     </script>
   </body>
 </html>
