@@ -25,8 +25,10 @@ tasksController = function () {
 
         $(taskPage).find('#saveTask').click(function(event) {
           event.preventDefault();
-          var task = $('form').toObject();
-          $('#taskRow').tmpl(task).appendTo($(taskPage).find('#tblTasks tbody'));
+          if ($(taskPage).find('form').valid()) {
+            var task = $('form').toObject();
+            $('#taskRow').tmpl(task).appendTo($(taskPage).find('#tblTasks tbody'));
+          }
         });
 
         initialized = true;
