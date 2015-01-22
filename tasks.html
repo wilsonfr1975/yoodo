@@ -11,9 +11,9 @@
     <header>
       <span>Task list</span>
     </header>
-    <div class="main">
+    <div class="main" id="taskPage">
       <section id="taskCreation" class="not">
-        <form>
+        <form id="taskForm">
           <div>
             <label>Task</label>
             <input type="text" required name="task" class="large" placeholder="Breakfast at Tiffanys" />
@@ -31,7 +31,7 @@
           </div>
           <nav>
             <a href="#" id="saveTask">Save task</a>
-            <a href="#">Clear task</a>
+            <a href="#" id="clearTask">Clear task</a>
           </nav>
         </form>
       </section>
