@@ -1,0 +1,6 @@
+{
+  "name" : "yoodo",
+  "scripts" : {
+    "start" : "browser-sync start --server --files='**/*' --index='tasks.html'"
+  }
+}
