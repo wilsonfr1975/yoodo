@@ -1,9 +1,19 @@
 tasksController = function () {
+  function errorLogger(errorCode, errorMessage) {
+    console.log(errorCode + ':' + errorMessage);
+  }
+
   var taskPage;
   var initialized = false;
+
   return {
     init: function(page) {
       if (!initialized) {
+        storageEngine.init(function () {
+          storageEngine.initObjectStore('task', function () {
+          }, errorLogger)
+        }, errorLogger);
+
         taskPage = page;
 
         $(taskPage).find('[required]').prev('label').append('<span>*</span>').children('span').addClass('required');
