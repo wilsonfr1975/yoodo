@@ -65,6 +65,20 @@ storageEngine = function() {
     },
 
     delete : function(type, id, successCallback, errorCallback) {
+      if (!initialized) {
+        errorCallback('storage_api_not_initialized', 'The storage engine has not been initialized');
+      } else if (!initializedObjectStores[type]) {
+        errorCallback('store_not_initialized', 'The object store ' + type + ' has not been initialized');
+      }
+
+      var storageItem = getStorageObject(type);
+      if (storageItem[id]) {
+        delete storageItem[id];
+        localStorage.setItem(type, JSON.stringify(storageItem));
+        successCallback(id);
+      } else {
+        errorCallback('object_not_found', 'The object requested could not be found');
+      }
     },
 
     findByProperty : function(type, propertyName, propertyValue, successCallback, errorCallback) {

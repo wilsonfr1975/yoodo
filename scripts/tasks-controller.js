@@ -29,8 +29,9 @@ tasksController = function () {
         });
 
         $(taskPage).find('#tblTasks tbody').on('click', '.deleteRow', function(event) {
-          event.preventDefault();
-          $(event.target).parents('tr').remove();
+          storageEngine.delete('task', $(event.target).data().taskId, function () {
+            $(event.target).parents('tr').remove();
+          }, errorLogger);
         });
 
         $(taskPage).find('#saveTask').click(function(event) {
