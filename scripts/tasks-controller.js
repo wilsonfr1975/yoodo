@@ -37,7 +37,10 @@ tasksController = function () {
           event.preventDefault();
           if ($(taskPage).find('form').valid()) {
             var task = $('form').toObject();
-            $('#taskRow').tmpl(task).appendTo($(taskPage).find('#tblTasks tbody'));
+
+            storageEngine.save('task', task, function(savedTask) {
+              $('#taskRow').tmpl(savedTask).appendTo($(taskPage).find('#tblTasks tbody'));
+            }, errorLogger);
           }
         });
 
