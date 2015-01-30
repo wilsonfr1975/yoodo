@@ -7,7 +7,7 @@ tasksController = function () {
   var initialized = false;
 
   return {
-    init: function(page) {
+    init : function(page) {
       if (!initialized) {
         storageEngine.init(function () {
           storageEngine.initObjectStore('task', function () {
@@ -46,6 +46,13 @@ tasksController = function () {
 
         initialized = true;
       }
+    },
+    loadTasks : function () {
+      storageEngine.findAll('task', function(tasks) {
+        $.each(tasks, function(i, task) {
+          $('#taskRow').tmpl(task).appendTo($(taskPage).find('#tblTasks tbody'));
+        });
+      }, errorLogger);
     }
   }
 }();
